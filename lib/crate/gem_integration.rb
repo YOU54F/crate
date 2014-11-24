@@ -1,5 +1,5 @@
 require 'crate/dependency'
-require 'rubygems/format'
+# require 'rubygems/format'
 module Crate
   class GemIntegration < Dependency
     #
@@ -79,7 +79,7 @@ module Crate
               src_file = f.sub( from, '' )
               next unless File.file?( src_file )
               next if File.directory?( src_file )
-              dest_file = File.join( to, src_file ) 
+              dest_file = File.join( to, src_file )
               dest_dir = File.dirname( dest_file )
               logger.debug "copy #{src_file} to #{dest_file}"
               FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )

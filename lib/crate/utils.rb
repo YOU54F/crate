@@ -13,13 +13,13 @@ module Crate
     def logger
       @logger ||= Logging::Logger['Crate::Utils']
     end
-    extend self 
+    extend self
 
     #
     # Changes into a directory and unpacks the archive.
     #
     def unpack( archive, into = Dir.pwd )
-      Dir.chdir( into ) do 
+      Dir.chdir( into ) do
         if archive.match( /\.tar\.gz\Z/ ) or archive.match(/\.tgz\Z/) then
           tgz = ::Zlib::GzipReader.new( File.open( local_source, 'rb') )
           ::Archive::Tar::Minitar.unpack( tgz, into )
@@ -51,8 +51,8 @@ module Crate
 
       begin
         case uri
-        when URI::FTP  : download_via_ftp( uri, to )
-        when URI::HTTP : download_via_http( uri, to )
+        when URI::FTP  then download_via_ftp( uri, to )
+        when URI::HTTP then  download_via_http( uri, to )
         else
           raise ::Crate::Error, "Downloading is only supported via FTP or HTTP at this time"
         end
@@ -97,7 +97,7 @@ module Crate
       end
     end
 
-    
+
     # Apply the given patch file in a particular directory
     #
     def apply_patch( patch_file, location )
