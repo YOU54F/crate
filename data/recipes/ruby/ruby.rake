@@ -22,7 +22,7 @@ Crate::Ruby.new( "ruby", "1.8.6-p287") do |t|
       FileUtils.cp File.join( install_dir, "usr", "lib", f ), pkg_dir
     end 
     sh "./configure --disable-shared --prefix=#{File.join( '/', 'usr' )}"
-    sh "make -j"
+    sh "make"
   end
 
   t.install_commands << "make install DESTDIR=#{t.install_dir}"

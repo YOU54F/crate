@@ -8,7 +8,7 @@ Crate::Dependency.new( "zlib", "1.2.3") do |t|
   t.build_commands << "./configure --prefix=#{File.join( '/', 'usr' )}"
 
   t.install_commands = [
-    "make -j install prefix=#{File.join( t.install_dir, 'usr' )}",
+    "make install prefix=#{File.join( t.install_dir, 'usr' )}",
     "make distclean"
   ]
 
