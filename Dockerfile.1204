@@ -1,0 +1,34 @@
+FROM ubuntu:12.04   
+RUN sed -i s/archive/old-releases/g etc/apt/sources.list
+RUN apt-get update && apt-get install ruby ruby-bundler rubygems git rake zlib1g-dev autoconf bison byacc gperf  -y
+WORKDIR /app
+RUN gem install amalgalite -v '0.8.0' --no-ri --no-rdoc
+RUN gem install configuration -v '1.3.4' --no-ri --no-rdoc
+RUN gem install flexmock -v '0.8.2' --no-ri --no-rdoc
+RUN gem install logging -v '0.9.7' --no-ri --no-rdoc
+RUN gem install minitar -v '0.6' --no-ri --no-rdoc
+COPY bin /app/bin
+COPY lib /app/lib
+COPY data /app/data
+COPY spec /app/spec
+COPY tasks /app/tasks
+COPY Rakefile /app
+COPY Gemfile /app
+COPY Gemfile.lock /app
+COPY crate.gemspec /app
+# because gemspec uses git ls-files
+RUN git init
+RUN git add .
+RUN bundle version
+RUN bundle install
+RUN rake install
+RUN crate new
+WORKDIR /app/new
+RUN bundle exec rake openssl:build
+RUN bundle exec rake openssl:install
+RUN ls /app/new/build/openssl/openssl-0.9.8j/*
+RUN ls /app/new/fakeroot/usr/lib/*
+RUN bundle exec rake ruby
+RUN ls /app/new/fakeroot/usr/lib/ruby/*
+COPY application.rb /app/new
+RUN bundle exec rake
