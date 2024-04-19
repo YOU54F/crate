@@ -263,10 +263,16 @@ module Crate
     def sh( cmd )
       logger.info( cmd )
 
-      io = IO.popen( "#{cmd} 2>&1" )
+      # io = IO.popen( "#{cmd} 2>&1" )
+      # io.each_line do |l|
+      #   logger.debug( l.strip )
+
+      io = IO.popen( "#{cmd}" )
       io.each_line do |l|
-        logger.debug( l.strip )
+        puts l
       end
+      io.close
+      exit 1 if $?.to_i != 0
     end
 
     #
