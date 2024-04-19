@@ -145,8 +145,10 @@ CRATE_BOOT_H
     #
     def compile_crate_boot
       create_crate_boot_h
-      compile_options = %w[ CFLAGS XCFLAGS CPPFLAGS ].collect { |c| compile_params[c] }.join(' ')
-      cmd = "#{compile_params['CC']} #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
+      # compile_options = %w[ CFLAGS XCFLAGS CPPFLAGS ].collect { |c| compile_params[c] }.join(' ')
+      compile_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -I/app/new/fakeroot/usr/include"
+      cmd = "gcc #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
+      # cmd = "#{compile_params['CC']} #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
       logger.debug cmd
       sh cmd
       ::CLEAN << "crate_boot.o"
@@ -156,13 +158,16 @@ CRATE_BOOT_H
     # Run the link command to create the final executable
     #
     def link_project
-      link_options = %w[ CFLAGS XCFLAGS LDFLAGS ].collect { |c| compile_params[c] }.join(' ')
+      link_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -L. -L/app/new/fakeroot/usr/lib -rdynamic -Wl,-export-dynamic"
+      # link_options = %w[ CFLAGS XCFLAGS LDFLAGS ].collect { |c| compile_params[c] }.join(' ')
       Dir.chdir( ::Crate.ruby.pkg_dir ) do
         dot_a = FileList[ "ext/**/*.a" ]
         dot_a << %w[ libssl.a libcrypto.a libz.a libruby-static.a  ] # order is important on the last 4
         dot_o = [ "ext/extinit.o", File.join( project_root, "crate_boot.o" )]
-        libs = compile_params['LIBS']
-        cmd = "#{compile_params['CC']} #{link_options} #{dot_o.join(' ')} #{libs} #{dot_a.join(' ')} -o #{File.join( dist_dir, name) }"
+        libs = "-ldl -lcrypt -lm "
+        # libs = compile_params['LIBS'] # TODO
+        cmd = "gcc #{link_options} #{dot_o.join(' ')} #{dot_a.join(' ')} #{libs} -o #{File.join( dist_dir, name) }"
+        # cmd = "#{compile_params['CC']} #{link_options} #{dot_o.join(' ')} #{libs} #{dot_a.join(' ')} -o #{File.join( dist_dir, name) }"
         logger.debug cmd
         sh cmd
       end
