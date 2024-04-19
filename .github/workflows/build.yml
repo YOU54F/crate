@@ -35,12 +35,3 @@ jobs:
       with:
         name: mycrateapp
         path: dist.tar.gz
-    
-
-docker run --rm -it --name crateapp --platform linux/amd64 cratey sh -c \
-'cd /app/new/dist && \
-  apt-get install file -y && \
-  file ./mycrateapp && \
-  du -sh mycrateapp && \
-  strip -s mycrateapp && \
-  du  -sh mycrateapp && file mycrateapp' 
