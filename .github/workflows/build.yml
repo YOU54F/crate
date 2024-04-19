@@ -17,7 +17,13 @@ jobs:
       run: docker build -t you54f/crate -f Dockerfile.1204 .
 
     - name: Run tests
-      run: docker run --name crateapp --platform linux/amd64 you54f/crate sh -c 'cd /app/new/dist && ./mycrateapp'
+        docker run --rm -it --name crateapp --platform linux/amd64 you54f/crate sh -c \
+        'cd /app/new/dist && \
+          apt-get install file -y && \
+          file ./mycrateapp && \
+          du -sh mycrateapp && \
+          strip -s mycrateapp && \
+          du  -sh mycrateapp && file mycrateapp' 
 
     - name: Copy artifact from Docker container
       run: |
@@ -29,3 +35,11 @@ jobs:
         name: mycrateapp
         path: dist.tar.gz
     
+
+docker run --rm -it --name crateapp --platform linux/amd64 cratey sh -c \
+'cd /app/new/dist && \
+  apt-get install file -y && \
+  file ./mycrateapp && \
+  du -sh mycrateapp && \
+  strip -s mycrateapp && \
+  du  -sh mycrateapp && file mycrateapp' 
