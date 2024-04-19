@@ -13,8 +13,8 @@ Crate::Dependency.new("openssl", "0.9.8j") do |t|
   t.build_commands = [
     # "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
     "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared no-asm",
-    # "rm -rf test",
-    "make"
+    "rm -rf test",
+    "make -j"
   ]
 
   t.install_commands = [
