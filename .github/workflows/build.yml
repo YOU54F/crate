@@ -1,0 +1,20 @@
+name: Build and test crate
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: docker build -t you54f/crate
+
+    - name: Run tests
+      run: docker run --rm -it --platform linux/amd64 crate sh -c 'cd dist && ./mycrateapp'
