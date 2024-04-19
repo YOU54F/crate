@@ -17,4 +17,15 @@ jobs:
       run: docker build -t you54f/crate -f Dockerfile.1204 .
 
     - name: Run tests
-      run: docker run --rm -it --platform linux/amd64 crate sh -c 'cd dist && ./mycrateapp'
+      run: docker run --name crateapp --platform linux/amd64 crate sh -c 'cd dist && ./mycrateapp'
+
+    - name: Copy artifact from Docker container
+      run: |
+        mkdir dist && docker cp crateapp:/app/new/dist ./dist
+        tar -czf dist.tar.gz dist
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: mycrateapp
+        path: dist.tar.gz
+    
