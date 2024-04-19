@@ -2,14 +2,14 @@
 # Crate recipe for ruby version 1.2.3
 #
 Crate::Ruby.new( "ruby", "1.8.6-p287") do |t|
-  t.depends_on( "openssl" )
-  t.depends_on( "zlib" )
+  # t.depends_on( "zlib" )
+  # t.depends_on( "openssl" )
 
   t.integrates( "amalgalite" )
   t.integrates( "arrayfields" )
   t.integrates( "configuration" )
 
-  t.upstream_source  = "ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6-p287.tar.gz"
+  t.upstream_source  = "http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.6-p287.tar.gz"
   t.upstream_md5     = "f6cd51001534ced5375339707a757556"
 
   ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
