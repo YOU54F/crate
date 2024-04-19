@@ -2,8 +2,8 @@
 # Crate recipe for ruby version 1.2.3
 #
 Crate::Ruby.new( "ruby", "1.8.6-p287") do |t|
-  # t.depends_on( "zlib" )
-  # t.depends_on( "openssl" )
+  t.depends_on( "zlib" )
+  t.depends_on( "openssl" )
 
   t.integrates( "amalgalite" )
   t.integrates( "arrayfields" )

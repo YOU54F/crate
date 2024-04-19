@@ -4,7 +4,7 @@
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 Crate::Dependency.new("openssl", "0.9.8j") do |t|
-  t.depends_on( "zlib" )
+  # t.depends_on( "zlib" )
   t.upstream_source = "https://openssl.org/source/openssl-0.9.8j.tar.gz"
   t.upstream_sha1   = "f70f7127a26e951e8a0d854c0c9e6b4c24df78e4"
   # ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"

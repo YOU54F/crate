@@ -24,11 +24,11 @@ RUN bundle install
 RUN rake install
 RUN crate new
 WORKDIR /app/new
-RUN bundle exec rake openssl:build
-RUN bundle exec rake openssl:install
-RUN ls /app/new/build/openssl/openssl-0.9.8j/*
-RUN ls /app/new/fakeroot/usr/lib/*
+# RUN bundle exec rake openssl:build
+# RUN bundle exec rake openssl:install
+# RUN ls /app/new/build/openssl/openssl-0.9.8j/*
 RUN bundle exec rake ruby
+RUN ls /app/new/fakeroot/usr/lib/*
 RUN ls /app/new/fakeroot/usr/lib/ruby/*
 COPY application.rb /app/new
 RUN bundle exec rake
