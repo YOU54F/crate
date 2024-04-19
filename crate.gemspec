@@ -14,17 +14,30 @@ Gem::Specification.new do |spec|
   spec.platform     = Gem::Platform::RUBY
 
   spec.files         = `git ls-files -z`.split("\x0")
+  # spec.files         = `git ls-files bin data examples lib spec tasks Rakefile crate.gemspec Gemfile`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency( "configuration", "~> 0.0.5")
-  spec.add_runtime_dependency( "archive-tar-minitar")
-  spec.add_runtime_dependency( "amalgalite", "~> 0.8")
-  spec.add_runtime_dependency( "logging", "~> 0.9" )
+  # spec.add_runtime_dependency( "configuration", "~> 0.0.5")
+  # spec.add_runtime_dependency( "minitar")
+  # spec.add_runtime_dependency( "amalgalite", "~> 1.3.0")
+  # spec.add_runtime_dependency( "logging", "~> 0.9" )
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  # spec.add_development_dependency "bundler", "~> 1.6"
+  # spec.add_development_dependency "rake"
+
+  # gems locked for 1.8.7 compatibility
+  spec.add_runtime_dependency( "configuration", "1.3.4")
+  spec.add_runtime_dependency( "minitar", '0.6')
+  spec.add_runtime_dependency( "amalgalite", "0.8.0")
+  spec.add_runtime_dependency( "flexmock", "0.8.2" )
+  spec.add_runtime_dependency( "logging", "0.9.7" )
+
+  spec.add_development_dependency "bundler", "1.0.15"
+  # spec.add_development_dependency "bundler", "~> 1.6"
+  # spec.add_development_dependency "rake", "0.9.2.2"
+  # spec.add_development_dependency "rake", "~> 0.9"
 
   # if rdoc = Configuration.for_if_exist?('rdoc') then
   #   spec.has_rdoc         = true
