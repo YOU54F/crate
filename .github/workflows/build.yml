@@ -18,7 +18,7 @@ jobs:
 
     - name: Run tests
       run: |
-        docker run --rm -it --name crateapp --platform linux/amd64 you54f/crate sh -c \
+        docker run --name crateapp --platform linux/amd64 you54f/crate sh -c \
         'cd /app/new/dist && \
           apt-get install file -y && \
           file ./mycrateapp && \
