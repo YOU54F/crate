@@ -21,7 +21,7 @@ Crate::Ruby.new( "ruby", "1.8.6-p287") do |t|
     %w[ libz.a libcrypto.a libssl.a ].each do |f| 
       FileUtils.cp File.join( install_dir, "usr", "lib", f ), pkg_dir
     end 
-    sh "./configure --disable-shared --prefix=#{File.join( '/', 'usr' )}"
+    sh "./configure --build=aarch64-unknown-linux-gnu --disable-shared --prefix=#{File.join( '/', 'usr' )}"
     sh "make"
   end
 

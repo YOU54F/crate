@@ -1,8 +1,10 @@
 #
 # Crate recipe for rubygems version 1.3.1
 #
-Crate::Dependency.new( "rubygems", "1.3.1") do |t|
-  t.upstream_source = "https://rubygems.org/rubygems/rubygems-1.3.1.tgz"
+Crate::Dependency.new( "rubygems", "1.8.30") do |t|
+# Crate::Dependency.new( "rubygems", "1.3.1") do |t|
+  t.upstream_source = "https://github.com/rubygems/rubygems/releases/download/v1.8.30/rubygems-1.8.30.tgz"
+  # t.upstream_source = "https://rubygems.org/rubygems/rubygems-1.3.1.tgz"
   t.upstream_sha1   = "a21ae466146bffb28ece05cddbdced0b908ca74f"
 
   # TODO: figure out proper integration of rubygems, or just wait until 1.9

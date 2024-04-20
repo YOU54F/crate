@@ -30,7 +30,8 @@ module Crate
     # verify that the given filename has a digest value
     #
     def valid?( filename )
-      engine.hexdigest( IO.read( filename ) ) == hex
+      data = File.open(filename, "rb") { |f| f.read }
+      engine.hexdigest( data ) == hex
     end
   end
 end

@@ -111,7 +111,7 @@ module Crate
     def upstream_md5=( checksum )
       @digest = Crate::Digest.md5( checksum )
     end
-    def usptream_md5
+    def upstream_md5
       if @digest then
         return @digest.hex
       else
