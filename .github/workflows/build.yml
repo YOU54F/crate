@@ -20,11 +20,14 @@ jobs:
       run: |
         docker run --name crateapp --platform linux/amd64 you54f/crate sh -c \
         'cd /app/new/dist && \
-          apt-get install file -y && \
-          file ./mycrateapp && \
-          du -sh mycrateapp && \
-          strip -s mycrateapp && \
-          du  -sh mycrateapp && file mycrateapp' 
+        ./mycrateapp && \
+        apt-get install file -y && \
+        file ./mycrateapp && \
+        du -sh mycrateapp && \
+        strip -s mycrateapp && \
+        du  -sh mycrateapp && \
+        ./mycrateapp && \
+        file mycrateapp' 
 
     - name: Copy artifact from Docker container
       run: |
