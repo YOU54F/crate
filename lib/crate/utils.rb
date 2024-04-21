@@ -4,6 +4,7 @@ require 'fileutils'
 require 'rubygems/installer'
 require 'net/ftp'
 require 'net/http'
+# OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 module Crate
   #

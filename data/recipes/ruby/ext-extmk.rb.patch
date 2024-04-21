@@ -4,7 +4,7 @@
 
 --- ext/extmk.rb
 +++ ext/extmk.rb
-@@ -500,6 +500,7 @@ void Init_ext _((void))\n{\n#$extinit}
+@@ -511,6 +511,7 @@ void Init_ext _((void))\n{\n#$extinit}
    end
  
    $extobjs = "ext/#{extinit.o} #{$extobjs}"
@@ -12,11 +12,12 @@
    if RUBY_PLATFORM =~ /m68k-human|beos/
      $extflags.delete("-L/usr/local/lib")
    end
-@@ -513,9 +514,17 @@ void Init_ext _((void))\n{\n#$extinit}
+@@ -524,9 +525,18 @@ void Init_ext _((void))\n{\n#$extinit}
    ].map {|n, v|
      "#{n}=#{v}" if v and !(v = v.strip).empty?
    }.compact
 -  puts conf
++  # puts conf
    $stdout.flush
    $mflags.concat(conf)
 +  unless enable_config("shared", $enable_shared )
