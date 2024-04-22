@@ -4,22 +4,23 @@
 
 --- ext/extmk.rb
 +++ ext/extmk.rb
-@@ -511,6 +511,7 @@ void Init_ext _((void))\n{\n#$extinit}
+@@ -550,6 +550,7 @@ void Init_ext _((void))\n{\n#$extinit}
    end
  
    $extobjs = "ext/#{extinit.o} #{$extobjs}"
 +  $extobjs = "#{$extobjs} libz.a libcrypto.a libssl.a"
-   if RUBY_PLATFORM =~ /m68k-human|beos/
+   if RUBY_PLATFORM =~ /beos/
      $extflags.delete("-L/usr/local/lib")
    end
-@@ -524,9 +525,18 @@ void Init_ext _((void))\n{\n#$extinit}
+@@ -563,10 +564,19 @@ void Init_ext _((void))\n{\n#$extinit}
    ].map {|n, v|
      "#{n}=#{v}" if v and !(v = v.strip).empty?
    }.compact
--  puts conf
-+  # puts conf
+-  puts(*conf)
++  # puts(*conf)
    $stdout.flush
    $mflags.concat(conf)
+   $makeflags.concat(conf)
 +  unless enable_config("shared", $enable_shared )
 +    $extobjs.split.each do |eo|
 +      if eo =~/^ext/ and eo =~ /\.a$/ then
@@ -32,3 +33,4 @@
  else
    FileUtils.rm_f(extinit.to_a)
  end
+diff --git a/ext/openssl/openssl_missing.h b/ext/openssl/openssl_missing.h

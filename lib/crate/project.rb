@@ -113,9 +113,10 @@ module Crate
       unless @compile_params
         @compile_params = {}
         Dir.chdir( ::Crate.ruby.pkg_dir ) do
-          %w[ CC CFLAGS LDFLAGS CPPFLAGS LIBS ].each do |p|
-            @compile_params[p] = %x( ./miniruby -I. -rrbconfig -e 'puts Config::CONFIG["#{p}"]' ).strip
+          %w[ CC CFLAGS XCFLAGS LDFLAGS CPPFLAGS LIBS ].each do |p|
+            @compile_params[p] = %x( ./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG["#{p}"]' ).strip
           end
+          # puts @compile_params.inspect
         end
       end
       return @compile_params
@@ -145,7 +146,8 @@ CRATE_BOOT_H
     #
     def compile_crate_boot
       create_crate_boot_h
-      compile_options = %w[ CFLAGS CPPFLAGS ].collect { |c| compile_params[c] }.join(' ')
+      puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG`
+      compile_options = %w[ CFLAGS XCFLAGS CPPFLAGS ].collect { |c| compile_params[c] }.join(' ')
       # compile_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -I/app/new/fakeroot/usr/include"
       # cmd = "gcc #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
       cmd = "#{compile_params['CC']} #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
@@ -159,8 +161,9 @@ CRATE_BOOT_H
     #
     def link_project
       # link_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -L. -L/app/new/fakeroot/usr/lib -rdynamic -Wl,-export-dynamic"
-      link_options = %w[ CFLAGS LDFLAGS ].collect { |c| compile_params[c] }.join(' ')
+      link_options = %w[ CFLAGS XCFLAGS LDFLAGS ].collect { |c| compile_params[c] }.join(' ')
       Dir.chdir( ::Crate.ruby.pkg_dir ) do
+        puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG`
         dot_a = FileList[ "ext/**/*.a" ]
         dot_a << %w[ libssl.a libcrypto.a libz.a libruby-static.a  ] # order is important on the last 4
         dot_o = [ "ext/extinit.o", File.join( project_root, "crate_boot.o" )]

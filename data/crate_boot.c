@@ -121,7 +121,7 @@ VALUE crate_wrap_app( VALUE arg )
 
 static VALUE dump_backtrace( VALUE elem, VALUE n ) 
 {
-  fprintf( stderr, "\tfrom %s\n", RSTRING(elem)->ptr );
+  fprintf( stderr, "\tfrom %s\n", RSTRING_PTR(elem) );
 }
 
 /**
@@ -199,7 +199,7 @@ int main( int argc, char** argv )
       VALUE message   = rb_obj_as_string( lasterr );
       VALUE backtrace = rb_funcall( lasterr, rb_intern("backtrace"), 0 );
 
-      fprintf( stderr, "%s: %s\n", RSTRING( klass )->ptr, RSTRING( message )->ptr );
+      fprintf( stderr, "%s: %s\n", RSTRING_PTR( klass ), RSTRING_PTR( message ) );
       rb_iterate( rb_each, backtrace, dump_backtrace, Qnil );
 
       rc = state;

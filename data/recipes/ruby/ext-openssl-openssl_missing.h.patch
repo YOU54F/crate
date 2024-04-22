@@ -1,7 +1,7 @@
 * make sure the headers for openssl match up
 --- ext/openssl/openssl_missing.h  2008-08-03 22:43:34.000000000 -0600
 +++ ext/openssl/openssl_missing.h  2009-01-18 17:46:19.000000000 -0700
-@@ -167,11 +167,11 @@ int BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_
+@@ -170,11 +170,11 @@ int BN_mod_sub(BIGNUM *r, const BIGNUM *a, const BIGNUM *b, const BIGNUM *m, BN_
  #endif
  
  #if !defined(HAVE_BN_RAND_RANGE)
@@ -15,4 +15,3 @@
  #endif
  
  #if !defined(HAVE_CONF_GET1_DEFAULT_CONFIG_FILE)
- 

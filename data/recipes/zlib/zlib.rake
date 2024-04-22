@@ -4,6 +4,7 @@
 Crate::Dependency.new( "zlib", "1.2.3") do |t|
   t.upstream_source = "http://www.zlib.net/fossils/zlib-1.2.3.tar.gz"
   t.upstream_md5    = "debc62758716a169df9f62e6ab2bc634"
+  ENV["CFLAGS"]= " -fPIC -static-libstdc++"
 
   t.build_commands << "./configure --prefix=#{File.join( '/', 'usr' )}"
 

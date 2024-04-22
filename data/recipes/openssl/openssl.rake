@@ -13,7 +13,7 @@ Crate::Dependency.new("openssl", "1.0.1f") do |t|
   puts "#{Dir.pwd}"
   t.build_commands = [
     # "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
-    "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
+    "./config -fPIC -static-libstdc++ --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
     "rm -rf test",
     "make"
   ]
