@@ -11,10 +11,10 @@ Crate::Ruby.new( "ruby", "1.8.7-p374") do |t|
 
   t.upstream_source  = "http://cache.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p374.tar.gz"
   # t.upstream_md5     = "f6cd51001534ced5375339707a757556"
-
+  ENV["CFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
   ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
   ENV["LDFLAGS"] = "-L#{File.join( t.install_dir, 'usr', 'lib' )}"
-  # ENV["PKGCONFIG"] = "-L#{File.join( t.install_dir, 'usr', 'lib', 'pkgconfig' )}"
+  ENV["PKG_CONFIG_PATH"] = "-L#{File.join( t.install_dir, 'usr', 'lib', 'pkgconfig' )}"
 
   def t.build
     # put the .a files from the fakeroot/usr/lib directory into the package
@@ -23,7 +23,10 @@ Crate::Ruby.new( "ruby", "1.8.7-p374") do |t|
       FileUtils.cp File.join( install_dir, "usr", "lib", f ), pkg_dir
     end 
     # sh "cd ext/openssl && ruby extconf.rb && cd ../.."
+    # sh "sed -i 's|dir_config(\"openssl\")|$libs << \" -lz \"; dir_config(\"openssl\")|' ext/openssl/extconf.rb"
+    sh "cat ext/openssl/extconf.rb"
     sh "./configure --build=aarch64-unknown-linux-gnu --disable-shared --prefix=#{File.join( '/', 'usr' )}"
+    # sh "./configure --build=aarch64-unknown-linux-gnu --disable-shared --with-static-linked-ext --prefix=#{File.join( '/', 'usr' )}"
     sh "make"
   end
 

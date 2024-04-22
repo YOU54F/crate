@@ -4,16 +4,23 @@
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 Crate::Dependency.new("openssl", "1.0.1f") do |t|
-  # t.depends_on( "zlib" )
+  t.depends_on( "zlib" )
   t.upstream_source = "https://openssl.org/source/openssl-1.0.1f.tar.gz"
     # t.upstream_sha1   = "f70f7127a26e951e8a0d854c0c9e6b4c24df78e4"
-
+    ENV["CFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
+    ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
+    ENV["LDFLAGS"] = "-L#{File.join( t.install_dir, 'usr', 'lib' )}"
+    ENV["PKG_CONFIG_PATH"] = "-L#{File.join( t.install_dir, 'usr', 'lib', 'pkgconfig' )}"
+  
   # ENV["LDFLAGS"] = "-L#{File.join( t.install_dir, 'usr', 'lib' )}"
   # ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
+  # ENV["CPPFLAGS"]= "-I#{File.join( t.install_dir, 'usr', 'include')}"
+  # ENV["LDFLAGS"] = "-L#{File.join( t.install_dir, 'usr', 'lib' )}"
   puts "#{Dir.pwd}"
   t.build_commands = [
-    # "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
-    "./config --prefix=#{File.join( '/', 'usr' )} zlib no-threads no-shared",
+    "./config --prefix=#{File.join( '/', 'usr' )} zlib no-zlib-dynamic no-threads no-shared",
+    # "./config --prefix=#{File.join( '/', 'usr' )} -lpthread no-shared",
+    # "./Configure --prefix=#{File.join( '/', 'usr' )} -lpthread linux-aarch64 no-shared",
     "rm -rf test",
     "make"
   ]
