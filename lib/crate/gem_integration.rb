@@ -1,5 +1,5 @@
 require 'crate/dependency'
-require 'rubygems/format'
+# require 'rubygems/format'
 module Crate
   class GemIntegration < Dependency
     #
@@ -35,8 +35,8 @@ module Crate
       desc "Integrate #{name} into ruby's build tree"
       task :integration => [ "#{name}:patch", "ruby:patch" ] do |t|
         logger.info "Integrating #{name} into ruby's tree"
-        # format = Gem::Package.new( local_source )
-        format = Gem::Format.from_file_by_path( local_source ) # TODO - changes with ruby version - works with 1.3.1 rubygems 
+        format = Gem::Package.new( local_source )
+        # format = Gem::Format.from_file_by_path( local_source ) # TODO - changes with ruby version - works with 1.3.1 rubygems 
         require_paths = format.spec.require_paths.dup
         integration_info = {}
 
@@ -54,13 +54,20 @@ module Crate
         end
 
         install_integration_files( integration_info )
-
-        setup_lines = IO.readlines( Crate.ruby.ext_setup_file )
-        if setup_lines.grep(/^#{name}/).empty? then
-          File.open( Crate.ruby.ext_setup_file, "a+" ) do |f|
-            logger.info "updating ext/Setup file to add #{name}"
-            f.puts name
+        dest_ext_dir = File.join( Crate.ruby.ext_dir, name )
+        if File.directory?( dest_ext_dir ) then
+          setup_lines = IO.readlines( Crate.ruby.ext_setup_file )
+          if setup_lines.grep(/^#{name}/).empty? then
+            File.open( Crate.ruby.ext_setup_file, "a+" ) do |f|
+              logger.info "updating ext/Setup file to add #{name}"
+              f.puts name
+            end
           end
+          # execute the extconf.rb in the ext folder
+          # Dir.chdir( dest_ext_dir ) do
+          #   puts "running extconf.rb in #{dest_ext_dir}"
+          #   sh "ruby extconf.rb"
+          # end
         end
       end
     end
@@ -70,68 +77,69 @@ module Crate
     # gemspec that should be installed into the designated destiation path (the
     # value)
     #
-    # def install_integration_files( info )
-    #   # format = Gem::Package.new( local_source )
-    #   format = Gem::Format.from_file_by_path( local_source ) # TODO - changes with rubygems version
-    #   puts format.spec.files
-    #   puts pkg_dir
-    #   # puts Dir.basename(pkg_dir)
-    #   info.each_pair do |from, to|
-    #     puts from
-    #     puts to
-    #     begin
-    #       Dir.chdir( File.join( pkg_dir, from ) ) do
-    #         format.spec.files.each do |f|
-    #           if f.index( from ) == 0 then
-    #             src_file = f.sub( from, '' )
-    #             next unless File.file?( src_file )
-    #             next if File.directory?( src_file )
-    #             dest_file = File.join( to, src_file )
-    #             dest_dir = File.dirname( dest_file )
-    #             logger.info "copy #{src_file} to #{dest_file}"
-    #             FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
-    #             FileUtils.cp src_file, dest_file
-    #           end
-    #         end
-    #       end
-    #     rescue => e
-    #       puts "Error installing #{name} files: #{e}"
-    #       Dir.chdir( File.join( pkg_dir ) ) do
-    #         format.spec.files.each do |f|
-    #           if f.index( from ) == 0 then
-    #             src_file = f.sub( from, '' )
-    #             next unless File.file?( src_file )
-    #             next if File.directory?( src_file )
-    #             dest_file = File.join( to, src_file )
-    #             dest_dir = File.dirname( dest_file )
-    #             logger.info "copy #{src_file} to #{dest_file}"
-    #             FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
-    #             FileUtils.cp src_file, dest_file
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
     def install_integration_files( info )
-      format = Gem::Format.from_file_by_path( local_source )
+      format = Gem::Package.new( local_source )
+      # format = Gem::Format.from_file_by_path( local_source ) # TODO - changes with rubygems version
+      puts format.spec.files
+      puts pkg_dir
+      # puts Dir.basename(pkg_dir)
       info.each_pair do |from, to|
-        Dir.chdir( File.join( pkg_dir, from ) ) do
-          format.spec.files.each do |f|
-            if f.index( from ) == 0 then
-              src_file = f.sub( from, '' )
-              next unless File.file?( src_file )
-              next if File.directory?( src_file )
-              dest_file = File.join( to, src_file )
-              dest_dir = File.dirname( dest_file )
-              logger.debug "copy #{src_file} to #{dest_file}"
-              FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
-              FileUtils.cp src_file, dest_file
+        puts from
+        puts to
+        begin
+          Dir.chdir( File.join( pkg_dir, from ) ) do
+            format.spec.files.each do |f|
+              if f.index( from ) == 0 then
+                src_file = f.sub( from, '' )
+                next unless File.file?( src_file )
+                next if File.directory?( src_file )
+                dest_file = File.join( to, src_file )
+                dest_dir = File.dirname( dest_file )
+                logger.info "copy #{src_file} to #{dest_file}"
+                FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
+                FileUtils.cp src_file, dest_file
+              end
+            end
+          end
+        rescue => e
+          puts "Error installing #{name} files: #{e}"
+          Dir.chdir( File.join( pkg_dir ) ) do
+            format.spec.files.each do |f|
+              if f.index( from ) == 0 then
+                src_file = f.sub( from, '' )
+                next unless File.file?( src_file )
+                next if File.directory?( src_file )
+                dest_file = File.join( to, src_file )
+                dest_dir = File.dirname( dest_file )
+                logger.info "copy #{src_file} to #{dest_file}"
+                FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
+                FileUtils.cp src_file, dest_file
+              end
             end
           end
         end
       end
     end
+    # def install_integration_files( info )
+    #   # format = Gem::Format.from_file_by_path( local_source )
+    #   format = Gem::Package.new( local_source )
+    #   info.each_pair do |from, to|
+    #     Dir.chdir( File.join( pkg_dir, from ) ) do
+    #       format.spec.files.each do |f|
+    #         if f.index( from ) == 0 then
+    #           src_file = f.sub( from, '' )
+    #           next unless File.file?( src_file )
+    #           next if File.directory?( src_file )
+    #           dest_file = File.join( to, src_file )
+    #           dest_dir = File.dirname( dest_file )
+    #           logger.debug "copy #{src_file} to #{dest_file}"
+    #           FileUtils.mkdir_p dest_dir unless File.directory?( dest_dir )
+    #           FileUtils.cp src_file, dest_file
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
   end
 end
 

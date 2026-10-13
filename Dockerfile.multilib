@@ -1,0 +1,59 @@
+FROM ubuntu:16.04
+RUN apt-get update && \
+    apt-get install -y build-essential \
+    gcc-multilib
+    # gcc-multilib-arm-linux-gnueabi \
+    # gcc-multilib-arm-linux-gnueabihf \
+    # # gcc-multilib-i686-linux-gnu \
+    # # gcc-multilib-mips-linux-gnu \
+    # # gcc-multilib-mips64-linux-gnuabi64 \
+    # # gcc-multilib-mips64el-linux-gnuabi64 \
+    # # gcc-multilib-mipsel-linux-gnu \
+    # gcc-multilib-powerpc64-linux-gnu \
+    # gcc-multilib-powerpc-linux-gnu \
+    # gcc-multilib-s390x-linux-gnu \
+    # gcc-multilib-sparc64-linux-gnu \
+    # gcc-multilib-x86-64-linux-gnu \
+    # gcc-multilib-x86-64-linux-gnux32
+
+# root@71a56220cce0:/# apt search gcc-multilib-*
+# Sorting... Done
+# Full Text Search... Done
+# gcc-multilib-arm-linux-gnueabi/xenial 4:5.3.1-1ubuntu1 arm64
+#   GNU C compiler for the armel architecture
+
+# gcc-multilib-arm-linux-gnueabihf/xenial 4:5.3.1-1ubuntu1 arm64
+#   GNU C compiler for the armhf architecture
+
+# gcc-multilib/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler (multilib files)
+
+# gcc-multilib-arm-linux-gnueabi/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the armel architecture
+
+# gcc-multilib-arm-linux-gnueabihf/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the armhf architecture
+
+# gcc-multilib-mips-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the mips architecture
+
+# gcc-multilib-mips64-linux-gnuabi64/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the mips64 architecture
+
+# gcc-multilib-mips64el-linux-gnuabi64/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the mips64el architecture
+
+# gcc-multilib-mipsel-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the mipsel architecture
+
+# gcc-multilib-powerpc-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the powerpc architecture
+
+# gcc-multilib-powerpc64-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the ppc64 architecture
+
+# gcc-multilib-s390x-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the s390x architecture
+
+# gcc-multilib-sparc64-linux-gnu/xenial 4:5.3.1-1ubuntu1 amd64
+#   GNU C compiler for the sparc64 architecture

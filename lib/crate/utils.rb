@@ -63,7 +63,9 @@ module Crate
           puts "into: #{into}"
           puts "subdir: #{subdir}"
           puts "archive: #{archive}"
-          Gem::Installer.new( archive ).unpack( subdir_path )
+          # Gem::Installer.new( archive ).unpack( subdir_path )
+          gem_package = Gem::Package.new(archive)
+          gem_package.extract_files subdir
         else
           raise "Unable to extract files from #{File.basename( local_source)} -- unknown format"
         end

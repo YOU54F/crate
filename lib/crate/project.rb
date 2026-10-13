@@ -93,14 +93,14 @@ module Crate
       unless @logger 
         @logger = Logging::Logger[name]
         @logger.level = :debug
-        @logger.add_appenders
+        # @logger.add_appenders
 
-        @logger.add_appenders( 
-            Logging::Appenders::File.new( File.join( project_root, "project.log" ), :layout => Logging::Layouts::Pattern.new( :pattern => "%d %5l: %m\n" )),
-            Logging::Appenders::Stdout.new( 'stdout', :level => :info,
-                                          :layout => Logging::Layouts::Pattern.new( :pattern      => "%d %5l: %m\n",
-                                                                                    :date_pattern => "%H:%M:%S") )
-        )
+        # @logger.add_appenders( 
+        #   @logger.appenders.File.new( File.join( project_root, "project.log" ), :layout => Logging::Layouts::Pattern.new( :pattern => "%d %5l: %m\n" )),
+        #     @logger.stdout.new( 'stdout', :level => :info,
+        #                                   :layout => Logging::Layouts::Pattern.new( :pattern      => "%d %5l: %m\n",
+        #                                                                             :date_pattern => "%H:%M:%S") )
+        # )
       end
       return @logger
     end
@@ -146,11 +146,14 @@ CRATE_BOOT_H
     #
     def compile_crate_boot
       create_crate_boot_h
-      puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG`
+      puts Crate.ruby.pkg_dir
+      Dir.chdir( ::Crate.ruby.pkg_dir ) do
+        puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG'`
+      end
       compile_options = %w[ CFLAGS XCFLAGS CPPFLAGS ].collect { |c| compile_params[c] }.join(' ')
       # compile_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -I/app/new/fakeroot/usr/include"
       # cmd = "gcc #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
-      cmd = "#{compile_params['CC']} #{compile_options} -I#{Crate.ruby.pkg_dir} -o crate_boot.o -c crate_boot.c"
+      cmd = "#{compile_params['CC']} #{compile_options} -I#{Crate.ruby.pkg_dir} -I#{File.join(Crate.ruby.pkg_dir,'include')} -I#{File.join(Crate.ruby.pkg_dir,'.ext','include','arm64-darwin22' )}  -o crate_boot.o -c crate_boot.c"
       logger.debug cmd
       sh cmd
       ::CLEAN << "crate_boot.o"
@@ -163,14 +166,14 @@ CRATE_BOOT_H
       # link_options =  "-g -O2 -DRUBY_EXPORT -D_GNU_SOURCE=1 -L. -L/app/new/fakeroot/usr/lib -rdynamic -Wl,-export-dynamic"
       link_options = %w[ CFLAGS XCFLAGS LDFLAGS ].collect { |c| compile_params[c] }.join(' ')
       Dir.chdir( ::Crate.ruby.pkg_dir ) do
-        puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG`
+        puts `./miniruby -I. -rrbconfig -e 'puts RbConfig::CONFIG'`
         dot_a = FileList[ "ext/**/*.a" ]
-        dot_a << %w[ libssl.a libcrypto.a libz.a libruby-static.a  ] # order is important on the last 4
+        dot_a << %w[ libyaml.a libffi.a libgmp.a amalgalite.a libssl.a libcrypto.a libz.a libruby.3.2-static.a ] # order is important on the last 4
         dot_o = [ "ext/extinit.o", File.join( project_root, "crate_boot.o" )]
         # libs = "-ldl -lcrypt -lm "
         libs = compile_params['LIBS']
         # cmd = "gcc #{link_options} #{dot_o.join(' ')} #{dot_a.join(' ')} #{libs} -o #{File.join( dist_dir, name) }"
-        cmd = "#{compile_params['CC']} #{link_options} #{dot_o.join(' ')} #{dot_a.join(' ')} #{libs} -o #{File.join( dist_dir, name) }"
+        cmd = "#{compile_params['CC']} #{link_options} #{dot_o.join(' ')} #{dot_a.join(' ')} #{libs} -framework CoreFoundation -o #{File.join( dist_dir, name) }"
         logger.debug cmd
         sh cmd
       end
@@ -190,14 +193,14 @@ CRATE_BOOT_H
         
         logger.info "Packing ruby standard lib into #{lib_db}"
         cmd = "#{packer_cmd} --drop-table --db #{lib_db} --compress --strip-prefix #{prefix} #{prefix}" 
-        logger.debug cmd
-        sh "#{cmd} > /dev/null"
+        logger.info cmd
+        # sh "#{cmd} "
        
         prefix = ::Crate.ruby.pkg_dir
         logger.info "Packing rbconfig into #{lib_db}"
         cmd = "#{packer_cmd} --db #{lib_db} --compress --strip-prefix #{prefix} #{File.join( prefix, "rbconfig.rb" )}" 
-        logger.debug cmd
-        sh "#{cmd} > /dev/null"
+        logger.info cmd
+        # sh "#{cmd} "
 
       end
 
@@ -213,8 +216,8 @@ CRATE_BOOT_H
             next unless File.directory?( prefix )
 
             cmd = "#{packer_cmd} --merge --db #{lib_db} --compress --strip-prefix #{prefix} #{prefix}"
-            logger.debug cmd
-            sh "#{cmd} > /dev/null"
+            logger.info cmd
+            sh "#{cmd} "
           end
         end
       end
@@ -222,8 +225,8 @@ CRATE_BOOT_H
       task :pack_amalgalite => dist_dir do
         logger.info "Packing amalgalite into #{lib_db}"
         cmd = "#{packer_cmd} --drop-table --db #{lib_db} --self"
-        logger.debug cmd
-        sh "#{cmd} > /dev/null"
+        logger.info cmd
+        # sh "#{cmd} "
       end
 
       task :pack_app => [ :pack_amalgalite, :pack_ruby, :pack_ruby_ext ] do
@@ -231,8 +234,8 @@ CRATE_BOOT_H
         Crate.project.packing_lists.each_with_index do |pl,idx|
           pc = ( idx == 0 ) ? "#{packer_cmd} --drop-table" : packer_cmd.dup
           cmd = "#{pc} --db #{app_db} --merge --compress --strip-prefix #{pl.prefix} #{pl.file_list.join(' ')} "
-          logger.debug cmd
-          sh "#{cmd} > /dev/null"
+          logger.info cmd
+          # sh "#{cmd} "
         end
       end
 
@@ -262,10 +265,10 @@ CRATE_BOOT_H
     # Load all .rake files that are in a recipe sub directory
     #
     def load_rakefiles
-      Dir["#{recipe_dir}/*/*.rake"].each do |recipe|
-        logger.debug "loading #{recipe}"
-        import recipe
-      end
+      # Dir["#{recipe_dir}/*/*.rake"].each do |recipe|
+      #   logger.debug "loading #{recipe}"
+      #   import recipe
+      # end
     end
   end
 end

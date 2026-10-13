@@ -77,7 +77,22 @@ module Crate
           f.puts "option nodynamic"
           f.puts
           ::Crate.project.extensions.each do |e|
-            f.puts e
+            # check if e has an ext folder, if it does
+            # add it to the ext/Setup file
+            puts "Checking for #{e}"
+            ext_folder = File.join( ext_dir, e )
+            puts "Checking for #{ext_folder}"
+            if File.directory?( ext_dir )
+              puts "patching #{e} into ext/Setup"
+              f.puts e
+              # execute the extconf.rb in the ext folder
+              # Dir.chdir( ext_folder ) do
+              #   puts "running extconf.rb in #{ext_folder}"
+              #   sh "ruby extconf.rb"
+              # end
+            else 
+              puts "no ext folder for #{e}"
+            end
           end
         end
       end

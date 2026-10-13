@@ -128,10 +128,10 @@ static VALUE dump_backtrace( VALUE elem, VALUE n )
  * ifdef items from ruby's original main.c
  */
 
-/* to link startup code with ObjC support */
-#if (defined(__APPLE__) || defined(__NeXT__)) && defined(__MACH__)
-static void objcdummyfunction( void ) { objc_msgSend(); }
-#endif
+// /* to link startup code with ObjC support */
+// #if (defined(__APPLE__) || defined(__NeXT__)) && defined(__MACH__)
+// static void objcdummyfunction( void ) { objc_msgSend(); }
+// #endif
 
 extern VALUE cARB;
 
@@ -144,12 +144,12 @@ int main( int argc, char** argv )
   crate_app ca;
 
   /** startup items from ruby's original main.c */
-#ifdef _WIN32
-  NtInitialize(&argc, &argv);
-#endif
-#if defined(__MACOS__) && defined(__MWERKS__)
-  argc = ccommand(&argv);
-#endif
+// #ifdef _WIN32
+//   NtInitialize(&argc, &argv);
+// #endif
+// #if defined(__MACOS__) && defined(__MWERKS__)
+//   argc = ccommand(&argv);
+// #endif
 
   /* setup ruby */
   ruby_init();
@@ -161,9 +161,9 @@ int main( int argc, char** argv )
   argc -= opt_mv;
   argv += opt_mv;
  
-  /* printf("crate file  : %s\n", ca.file_name);   */
-  /* printf("crate class : %s\n", ca.class_name);  */
-  /* printf("crate method: %s\n", ca.method_name); */
+  printf("crate file  : %s\n", ca.file_name);  
+  printf("crate class : %s\n", ca.class_name); 
+  printf("crate method: %s\n", ca.method_name);
 
   /* make ARGV available */
   ruby_set_argv( argc, argv );
@@ -200,7 +200,7 @@ int main( int argc, char** argv )
       VALUE backtrace = rb_funcall( lasterr, rb_intern("backtrace"), 0 );
 
       fprintf( stderr, "%s: %s\n", RSTRING_PTR( klass ), RSTRING_PTR( message ) );
-      rb_iterate( rb_each, backtrace, dump_backtrace, Qnil );
+      rb_block_call(backtrace, rb_intern("each"), 0, NULL, dump_backtrace, Qnil);
 
       rc = state;
     }

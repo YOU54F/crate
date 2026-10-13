@@ -1,0 +1,80 @@
+FROM ubuntu:14.04 as ruby-1.8.7
+
+RUN apt-get update && apt-get install -y build-essential wget \
+    # Required for buiding ruby from source
+    git autoconf bison byacc gperf libssl-dev
+RUN sed -i -e 's=^mozilla/DST_Root_CA_X3.crt=!mozilla/DST_Root_CA_X3.crt=' /etc/ca-certificates.conf && update-ca-certificates
+RUN openssl version
+RUN find / -name 'libssl.so*'
+RUN find / -name 'libssl.a*'
+RUN find / -name 'openssl.pc'
+WORKDIR /tmp
+ARG RUBY_VERSION=1.8.7-p374
+ARG RUBY_GEMS_VERSION=1.8.30
+ARG BUNDLER_VERSION=1.17.3
+ARG RAKE_VERSION=0.8.7
+RUN wget https://cache.ruby-lang.org/pub/ruby/1.8/ruby-${RUBY_VERSION}.tar.gz && \
+    tar -xzvf ruby-${RUBY_VERSION}.tar.gz && \
+    rm ruby-${RUBY_VERSION}.tar.gz && \
+    cd ruby-${RUBY_VERSION} && \
+    ./configure --build=$(uname -m)-unknown-linux-gnu && \
+    make && \
+    make install && cat ext/openssl/mkmf.log && \
+    rm -rf /tmp/ruby-${RUBY_VERSION}
+RUN ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+RUN wget https://github.com/rubygems/rubygems/releases/download/v${RUBY_GEMS_VERSION}/rubygems-${RUBY_GEMS_VERSION}.tgz && \
+    tar -xzvf rubygems-${RUBY_GEMS_VERSION}.tgz && \
+    rm rubygems-${RUBY_GEMS_VERSION}.tgz && \
+    cd rubygems-${RUBY_GEMS_VERSION} && \
+    ruby setup.rb && \
+    rm -rf /tmp/rubygems-${RUBY_GEMS_VERSION}
+RUN gem install bundler -v ${BUNDLER_VERSION}
+RUN gem install rake -v ${RAKE_VERSION}
+FROM ruby-1.8.7 as crate
+# ARG AMALGALITE_VERSION=1.3.0
+# ARG FLEXMOCK_VERSION=0.8.2
+# ARG LOGGING_VERSION=0.9.7
+# ARG MINITAR_VERSION=0.6
+WORKDIR /app
+# RUN gem install amalgalite -v ${AMALGALITE_VERSION} --no-ri --no-rdoc
+# RUN gem install flexmock -v ${FLEXMOCK_VERSION} --no-ri --no-rdoc
+# RUN gem install logging -v ${LOGGING_VERSION} --no-ri --no-rdoc
+# RUN gem install minitar -v ${MINITAR_VERSION} --no-ri --no-rdoc
+COPY bin /app/bin
+COPY lib /app/lib
+COPY data /app/data
+COPY spec /app/spec
+COPY tasks /app/tasks
+COPY Rakefile /app
+COPY Gemfile /app
+COPY Gemfile.lock /app
+COPY crate.gemspec /app
+# # because gemspec uses git ls-files
+# RUN git init
+# RUN git add .
+# RUN bundle version
+# RUN bundle install
+# RUN rake install
+# RUN crate new
+# WORKDIR /app/new
+# RUN ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+# RUN rake ruby
+# RUN ls /app/new/fakeroot/usr/lib/*
+# RUN ls /app/new/fakeroot/usr/lib/ruby/*
+# RUN find /app/new/build/ruby/ -name '*.a'
+# RUN find /app/new/build/ruby/ -name '*.bundle'
+# RUN find /app/new/build/ruby/ -name '*.so'
+# RUN find /app/new/build/ruby/ -name '*.so' -exec ldd {} \;
+# RUN find /app/new/fakeroot/ -name '*.so' -exec rm {} \;
+# COPY application.rb /app/new
+# RUN rake
+# RUN ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"' || echo "expect zlib failure as not required"
+# # our fakeroot should work without require
+# RUN fakeroot/usr/bin/ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+# # RUN fakeroot/usr/bin/ruby -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+# RUN fakeroot/usr/bin/ruby -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"'
+# WORKDIR /app/new/dist
+# # RUN ./mycrateapp
+# ENTRYPOINT [ "/app/new/dist/mycrateapp" ]
+# we need openssl 1.0.x as 0.9.x not supported by modern clients
+# rubygems 1.3.1 used rubyforge.org as source, which is no longer available

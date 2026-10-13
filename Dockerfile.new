@@ -1,0 +1,53 @@
+FROM ubuntu:14.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    zlib1g-dev \
+    wget
+
+# Set custom prefix for installation
+ENV PREFIX=/usr/local
+
+# Install libz to custom prefix
+RUN wget https://zlib.net/fossils/zlib-1.2.11.tar.gz && \
+    tar -xf zlib-1.2.11.tar.gz && \
+    cd zlib-1.2.11 && \
+    ./configure --prefix=$PREFIX && \
+    make && \
+    make install
+
+# Install OpenSSL to custom prefix
+RUN wget https://www.openssl.org/source/openssl-1.1.1l.tar.gz && \
+    tar -xf openssl-1.1.1l.tar.gz && \
+    cd openssl-1.1.1l && \
+    ./config --prefix=$PREFIX && \
+    make -j && \
+    make install_sw
+
+# Set OpenSSL directories for Ruby compilation
+ENV OPENSSL_LIB_DIR=$PREFIX/lib
+ENV OPENSSL_INCLUDE_DIR=$PREFIX/include
+# RUN cat "$PREFIX"/lib/pkgconfig/libcrypto.pc && \
+#     sed -i 's/^Libs:.*/Libs: -L${libdir} -lcrypto -lz -ldl -lpthread/' "$PREFIX"/lib/pkgconfig/libcrypto.pc && \
+#     sed -i '/^Libs.private:.*/d' "$PREFIX"/lib/pkgconfig/libcrypto.pc && \
+#     cat "$PREFIX"/lib/pkgconfig/libcrypto.pc
+# Install Ruby linked against OpenSSL
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.7/ruby-2.7.4.tar.gz && \
+    apt-get remove -y libssl-dev && \
+    tar -xf ruby-2.7.4.tar.gz && \
+    cd ruby-2.7.4 && \
+    # sed -i 's|dir_config("openssl")|dir_config("openssl", "'"$PREFIX"'/include", "'"$PREFIX"'/lib")|' ext/openssl/extconf.rb && \
+    # echo ext/openssl/extconf.rb && \
+    ./configure --prefix=$PREFIX --enable-static --disable-shared --with-static-linked-ext --disable-install-doc --with-openssl-dir=$PREFIX && \
+    make -j Q= V=1 exts.mk || true && \
+    cat ext/openssl/mkmf.log && \
+    make -j Q= V=1 && \
+    make install
+RUN ldd "$PREFIX"/bin/ruby || echo true
+RUN ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+# Set the entry point
+ENTRYPOINT ["ruby"]
+
+# Set the default command
+CMD ["--version"]

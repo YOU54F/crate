@@ -1,0 +1,201 @@
+root@4281605e9a8b:/app/new2/build/ruby/ruby-3.3.1# history
+    1  cd app/new2/build/ruby/
+    2  ls
+    3  cd ruby-3.3.1
+    4  make install DESTDIR=/app/new2/fakeroot
+    5  make install DESTDIR=/app/new2/fakeroot
+    6  make install DESTDIR=/app/new2/fakeroot
+    7  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+    8  find . -name '.so'
+    9  find . -name '.a'
+   10  find . -name '*.a'
+   11  find . -name '*.so'
+   12  find . -name '*.so' | xargs rm
+   13  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   14  find . -name '*.so'
+   15  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   16  ls .ext/aarch64-linux/amalgalite/3.3/
+   17  ls .ext/aarch64-linux/enc/trans/
+   18  ls .ext/
+   19  ls .ext/common/
+   20  ls .ext/include/
+   21  ls .ext/include/aarch64-linux/
+   22  ls .ext/include/aarch64-linux/ruby/
+   23  ls .ext/include/
+   24  ls .ext/include/ruby/
+   25  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   26  rm -rf .ext
+   27  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   28  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' ./configure --build=aarch64-unknown-linux-gnu --enable-static --with-static-linked-ext --prefix=/usr --disable-install-doc
+   29  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   30  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   31  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   32  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   33  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   34  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   35  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   36  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   37  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   38  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   39  ruby -v
+   40  ./ruby -v
+   41  ./ruby -ropenssl -etrue
+   42* ruby -rope
+   43  
+   44  ./ruby -rzlib -etrue
+   45  ./ruby -e 'puts "hello"'
+   46  ./ruby -rrubygems -e 'puts "hello"'
+   47  ./ruby -rbundler/setup -e 'puts "hello"'
+   48  ./ruby -rbundler/setup --disable-error_highlight --disable-did_you_mean -e 'puts "hello"'
+   49  ./ruby --disable-error_highlight --disable-did_you_mean -e 'puts "hello"'
+   50  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest -e 'puts "hello"'
+   51  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-RubyGems -e 'puts "hello"'
+   52  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-rubygems -e 'puts "hello"'
+   53  CFLAGS='-I.' ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-rubygems -e 'puts "hello"'
+   54  CFLAGS='-I.' ./ruby  -e 'puts "hello"'
+   55  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-rubygems -e 'puts "hello"'
+   56  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-gems -e 'puts "hello"'
+   57  ./ruby --disable-error_highlight --disable-did_you_mean --disable-syntax_suggest --disable-gems -e 'puts "hello"'
+   58  CFLAGS='-I.' ./ruby  -e 'puts "hello"'
+   59  CFLAGS='-I./' ./ruby  -e 'puts "hello"'
+   60  LDFLAGS='-L./' ./ruby  -e 'puts "hello"'
+   61  ./ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+   62  ./ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+   63  ./ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   64  ./ruby -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"
+   65  ./ruby -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"'
+   66  ./ruby -ramalgalite -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"'
+   67  ./ruby -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"'
+   68  ./ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   69  ./ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   70  ./ruby -ramalgalite -e 'puts "SQLite Version  : #{Amalgalite::SQLite3::Version}"'
+   71  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   72  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   73  cd ext/amalgalite/
+   74  ls
+   75  find . -name .o
+   76  find . -name '(.o'
+   77  find . -name '*.o'
+   78  rm -rf amalgalite.a
+   79  ar rcs amalgalite.a *.o
+   80  cd ..
+   81  cd ..
+   82  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   83  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   84  find . -name '*.a'
+   85  find ../../../fakeroot/ -name '*.a'
+   86  find ../../../fakeroot/ -name '*.so'
+   87  ../../../fakeroot/usr/bin/ruby -v
+   88  ../../../fakeroot/usr/bin/ruby -e 'puts "hello"'
+   89  ../../../fakeroot/usr/bin/ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   90  ../../../fakeroot/usr/bin/ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   91  ../../../fakeroot/usr/bin/ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   92  ../../../fakeroot/usr/bin/ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+   93  ls
+   94  ../../../fakeroot/usr/bin/gem
+   95  ../../../fakeroot/usr/bin/gem 
+   96  ../../../fakeroot/usr/bin/ruby
+   97  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+   98  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' ./configure --build=aarch64-unknown-linux-gnu --enable-static --with-static-linked-ext --with-ext=amalgalite --prefix=/usr --disable-install-doc
+   99  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+  100  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' ./configure --build=aarch64-unknown-linux-gnu --enable-static --with-static-linked-ext --with-ext=amalgalite --prefix=/usr --disable-install-doc
+  101  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+  102  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+  103  CFLAGS='-I. -I/include -I/app/new2/fakeroot/usr/include' LDFLAGS='-L. -L/app/new2/fakeroot/usr/lib' make install DESTDIR=/app/new2/fakeroot
+  104  ../../../fakeroot/usr/bin/ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+  105  ../../../fakeroot/usr/bin/ruby -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+  106  ../../../fakeroot/usr/bin/ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+  107  ../../../fakeroot/usr/bin/ruby -ramalgalite -e 'puts "zlib Version    : #{Zlib::zlib_version}"'
+  108  ../../../fakeroot/usr/bin/ruby -ramalgalite -etrie
+  109  ../../../fakeroot/usr/bin/ruby -ramalgalite -etrue
+  110  cd ..
+  111  cd ..
+  112  cd ..
+  113  rake
+  114  cd ..
+  115  rake install
+  116  bundle install
+  117  rake install
+  118  cd new2
+  119  rake
+  120  cd build/ruby/ruby-3.3.1
+  121  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  122  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  123  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  124  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  125  gcc -static -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  126  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  127  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a  ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  128  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  129  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  130  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.aa ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  131  gcc -fPIC -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  132  la
+  133  ls
+  134  cd ..
+  135  cd ..
+  136  ls
+  137  cd ..
+  138  ls
+  139  rm -rf crate_boot.o
+  140  rake
+  141  ls /app/new2/build/ruby/ruby-3.3.1/.ext/include/aarch64-linux
+  142  ls /app/new2/build/ruby/ruby-3.3.1/.ext/include/aarch64-linux/ruby/
+  143  ls
+  144  rm crate_boot.o
+  145  rake
+  146  rm crate_boot.o
+  147  rake
+  148  rake
+  149  rake
+  150  rake
+  151  cd build/ruby/ruby-3.3.1
+  152  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -o /app/new2/dist/mycrateapp
+  153  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp  -o /app/new2/dist/mycrateapp
+  154  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -o /app/new2/dist/mycrateapp
+  155  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -o /app/new2/dist/mycrateapp
+  156  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -crypt -o /app/new2/dist/mycrateapp
+  157  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -lcrypt -o /app/new2/dist/mycrateapp
+  158  cd dist
+  159  history
+  160  cd ..
+  161  cd ..
+  162  cd ..
+  163  rake
+  164  cd build/ruby/ruby-3.3.1
+  165  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -lcrypt -o /app/new2/dist/mycrateapp
+  166  cd ../../
+  167  ls
+  168  cd ..
+  169  cd dist
+  170  ./mycrateapp 
+  171  cd ,,
+  172  cd ..
+  173  rake
+  174  ls dist
+  175  cd build/ruby/ruby-3.3.1
+  176  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -lcrypt -o /app/new2/dist/mycrateapp
+  177  (cd ../../../dist/ && ./mycrateapp)
+  178  cd ..
+  179  cd ..
+  180  cd ..
+  181  rake
+  182  rm -rf crate_boot.o
+  183  rake
+  184  cd build/ruby/ruby-3.3.1
+  185  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -lcrypt -o /app/new2/dist/mycrateapp
+  186  cd ../../
+  187  cd ../
+  188  cd dist
+  189  ./mycrateapp 
+  190  cd ..
+  191  rake
+  192  rm -rf crate_boot.o
+  193  rake
+  194  cd build/ruby/ruby-3.3.1
+  195  gcc -I. -I/include -I/app/new2/fakeroot/usr/include  -L. -L. -L/app/new2/fakeroot/usr/lib -fstack-protector-strong -rdynamic -Wl,-export-dynamic ext/extinit.o /app/new2/crate_boot.o ext/amalgalite/amalgalite.a ext/bigdecimal/bigdecimal.a ext/cgi/escape/escape.a ext/continuation/continuation.a ext/coverage/coverage.a ext/date/date_core.a ext/digest/bubblebabble/bubblebabble.a ext/digest/digest.a ext/digest/md5/md5.a ext/digest/rmd160/rmd160.a ext/digest/sha1/sha1.a ext/digest/sha2/sha2.a ext/erb/escape/escape.a ext/etc/etc.a ext/fcntl/fcntl.a ext/fiddle/fiddle.a ext/io/console/console.a ext/io/nonblock/nonblock.a ext/io/wait/wait.a ext/json/generator/generator.a ext/json/parser/parser.a ext/monitor/monitor.a ext/nkf/nkf.a ext/objspace/objspace.a ext/openssl/openssl.a ext/pathname/pathname.a ext/psych/psych.a ext/pty/pty.a ext/rbconfig/sizeof/sizeof.a ext/ripper/ripper.a ext/socket/socket.a ext/stringio/stringio.a ext/strscan/strscan.a ext/syslog/syslog.a ext/zlib/zlib.a libssl.a libcrypto.a libz.a libruby-static.a -lm -lpthread -lffi -lgmp -lyaml -lcrypt -o /app/new2/dist/mycrateapp
+  196  (cd ../../../dist/ && ./mycrateapp)
+  197  sqlite
+  198  sqlite3
+  199  history
+root@4281605e9a8b:/app/new2/build/ruby/ruby-3.3.1# 

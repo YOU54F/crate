@@ -1,0 +1,145 @@
+# ARG DEBIAN_FRONTEND=noninteractive
+FROM ubuntu:14.04 as ruby-static
+# RUN apt-get update && apt-get install -y ruby ruby-dev ruby-bundler rake libssl-dev zlib1g-dev git \
+#     # Required for buiding ruby from source
+#     git autoconf bison byacc gperf libssl-dev
+
+# cross compilers
+# RUN apt-get install gcc-multilib-arm-linux-gnueabihf
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -yq build-essential autoconf bison wget ruby
+ARG TARGET_CC=aarch64-linux-gnu-gcc
+ARG TARGET_AR=aarch64-linux-gnu-ar
+ARG TARGET_CC=gcc
+ARG TARGET_AR=ar
+ARG TARGET_HOST=aarch64-linux-gnu
+# CC=arm-linux-gnueabihf-gcc CPPFLAGS="-P" ./configure --host=arm-linux-gnueabihf --without-cxx-binding && \
+# ncurses
+WORKDIR /usr/src
+ARG NCURSES_VERSION=6.0
+RUN wget ftp://ftp.gnu.org/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz && \
+    tar xvfz ncurses-${NCURSES_VERSION}.tar.gz && \
+    rm ncurses-${NCURSES_VERSION}.tar.gz
+RUN ln -s ncurses-${NCURSES_VERSION} ncurses
+RUN cd /usr/src/ncurses && \
+    CC=${TARGET_CC} CPPFLAGS="-P" ./configure --host=${TARGET_HOST} --without-cxx-binding && \
+    make && \
+    make install DESTDIR=/usr/src/ncurses/target
+
+# readline
+
+WORKDIR /usr/src
+ARG READLINE_VERSION=6.3
+RUN wget ftp://ftp.gnu.org/gnu/readline/readline-${READLINE_VERSION}.tar.gz && \
+    tar xvfz readline-${READLINE_VERSION}.tar.gz && \
+    rm readline-${READLINE_VERSION}.tar.gz
+RUN ln -s readline-${READLINE_VERSION} readline
+# CC=arm-linux-gnueabihf-gcc CFLAGS="-I/usr/src/ncurses/target/usr/include" LDFLAGS="-L/usr/src/ncurses/target/usr/lib" ./configure --host=arm-linux-gnueabihf --enable-static --disable-shared    make && \
+RUN cd /usr/src/readline && \
+    autoconf && \
+    CC=${TARGET_CC} CFLAGS="-I/usr/src/ncurses/target/usr/include" LDFLAGS="-L/usr/src/ncurses/target/usr/lib" ./configure --host=${TARGET_HOST} --enable-static --disable-shared && \
+    make && \
+    make install DESTDIR=/usr/src/readline/target
+
+# gdbm
+
+WORKDIR /usr/src
+ARG GDBM_VERSION=1.13
+RUN wget ftp://ftp.gnu.org/gnu/gdbm/gdbm-${GDBM_VERSION}.tar.gz && \
+    tar xvfz gdbm-${GDBM_VERSION}.tar.gz && \
+    rm gdbm-${GDBM_VERSION}.tar.gz
+RUN ln -s gdbm-${GDBM_VERSION} gdbm
+# CC=arm-linux-gnueabihf-gcc CFLAGS="-I/usr/src/readline/target/usr/local/include -I/usr/src/ncurses/target/usr/include" LDFLAGS="-L/usr/src/readline/target/usr/local/lib -L/usr/src/ncurses/target/usr/lib" ./configure --host=arm-linux-gnueabihf --enable-static --disable-shared
+RUN cd /usr/src/gdbm && \
+    autoconf && \
+    CC=${TARGET_CC} CFLAGS="-I/usr/src/readline/target/usr/local/include -I/usr/src/ncurses/target/usr/include" LDFLAGS="-L/usr/src/readline/target/usr/local/lib -L/usr/src/ncurses/target/usr/lib" ./configure  --host=${TARGET_HOST} --enable-static --disable-shared && \
+    make && \
+    make install DESTDIR=/usr/src/gdbm/target
+
+# zlib
+
+WORKDIR /usr/src
+ARG ZLIB_VERSION=1.2.11
+RUN wget http://zlib.net/fossils/zlib-${ZLIB_VERSION}.tar.gz && \
+    tar xvfz zlib-${ZLIB_VERSION}.tar.gz && \
+    rm zlib-${ZLIB_VERSION}.tar.gz
+RUN ln -s zlib-${ZLIB_VERSION} zlib
+# CC=arm-linux-gnueabihf-gcc ./configure --static
+RUN cd /usr/src/zlib && \
+    CC=${TARGET_CC} ./configure --static && \
+    make && \
+    make install DESTDIR=/usr/src/zlib/target
+
+# libffi
+
+WORKDIR /usr/src
+ARG LIBFFI_VERSION=3.2.1
+RUN wget ftp://sourceware.org/pub/libffi/libffi-${LIBFFI_VERSION}.tar.gz && \
+    tar xvfz libffi-${LIBFFI_VERSION}.tar.gz && \
+    rm libffi-${LIBFFI_VERSION}.tar.gz
+RUN ln -s libffi-${LIBFFI_VERSION} libffi
+# CC=arm-linux-gnueabihf-gcc ./configure --host=arm-linux-gnueabihf --enable-static --disable-shared
+RUN cd /usr/src/libffi && \
+    CC=${TARGET_CC} ./configure --host=${TARGET_HOST} --enable-static --disable-shared && \
+    make && \
+    make install DESTDIR=/usr/src/libffi/target
+
+# openssl
+
+WORKDIR /usr/src
+ARG OPENSSL_VERSION=1.1.0l
+RUN wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz && \
+    tar xvfz openssl-${OPENSSL_VERSION}.tar.gz && \
+    rm openssl-${OPENSSL_VERSION}.tar.gz
+RUN ln -s openssl-${OPENSSL_VERSION} openssl
+ARG TARGET_OPENSSL_HOST=linux-aarch64
+# ARG TARGET_OPENSSL_HOST=linux-armv4
+# CC=arm-linux-gnueabihf-gcc ./Configure -lpthread linux-armv4 no-shared
+RUN cd /usr/src/openssl && \
+    CC=${TARGET_CC} ./Configure -lpthread ${TARGET_OPENSSL_HOST} no-shared && \
+    make && \
+    make install DESTDIR=/usr/src/openssl/target
+
+# ruby
+
+WORKDIR /usr/src
+ARG RUBY_VERSION=2.4.10
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.4/ruby-${RUBY_VERSION}.tar.gz && \
+    tar xvfz ruby-${RUBY_VERSION}.tar.gz && \
+    rm ruby-${RUBY_VERSION}.tar.gz
+RUN ln -s ruby-${RUBY_VERSION} ruby
+
+RUN cd /usr/src/ruby && \
+    CC=${TARGET_CC} CFLAGS="-I/usr/src/ncurses/target/usr/include -I/usr/src/zlib/target/usr/local/include -I/usr/src/gdbm/target/usr/local/include -I/usr/src/libffi/target/usr/local/include -I/usr/src/openssl/target/usr/local/include -I/usr/src/readline/target/usr/local/include" LDFLAGS="-L/usr/src/ncurses/target/usr/lib -L/usr/src/zlib/target/usr/local/lib -L/usr/src/gdbm/target/usr/local/lib -L/usr/src/libffi/target/usr/local/lib -L/usr/src/openssl/target/usr/local/lib -L/usr/src/readline/target/usr/local/lib" \
+        ./configure \
+        --host=${TARGET_HOST} \
+        --disable-install-doc \
+        --disable-shared \
+        --enable-static \
+        --with-static-linked-ext \
+        --without-dbm \
+        --with-gdbm && \
+        make && \
+        make install DESTDIR=/usr/src/ruby/target
+RUN ls -l /usr/src/ruby/target/usr/local/bin/ruby
+RUN find /usr/src/ruby-${RUBY_VERSION}/ -name '*.a' -exec ls -l {} \;
+RUN find /usr/src/ruby-${RUBY_VERSION}/ -name '*.so' -exec ls -l {} \;
+RUN tar cvfz /usr/src/ruby-${RUBY_VERSION}-static.tar.gz -C /usr/src/ruby/target .
+ENTRYPOINT [ "/usr/src/ruby/target/usr/local/bin/ruby" ]
+
+# FROM debian:9-slim as ruby-enduser
+FROM centos:7 as ruby-enduser
+ARG RUBY_VERSION=2.4.10
+# FROM alpine:3.15 as ruby-enduser
+# RUN apk add --no-cache libc6-compat gcompat
+COPY --from=ruby-static /usr/src/ruby-${RUBY_VERSION}-static.tar.gz /
+RUN tar xvfz /ruby-${RUBY_VERSION}-static.tar.gz -C / && \
+    rm /ruby-${RUBY_VERSION}-static.tar.gz
+RUN ruby -v && \
+    ruby -e 'puts "hello"' && \
+    ruby -rzlib -e 'puts "zlib Version    : #{Zlib::zlib_version}"' && \
+    ruby -ropenssl -e 'puts "OpenSSL Version : #{OpenSSL::OPENSSL_VERSION}"'
+RUN find / -name '*.a' -exec ls -l {} \;
+RUN find / -name '*.so' -exec ls -l {} \;
+RUN ldd /usr/local/bin/ruby
+ENTRYPOINT [ "ruby" ]

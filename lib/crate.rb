@@ -8,12 +8,14 @@ require 'logging'
 require 'date'
 
 # Configure Crate to log to STDOUT at the 'info' level
-Logging::Logger['Crate'].level = :debug
-Logging::Logger['Crate'].add_appenders( Logging::Appender.stdout )
-Logging::Appender.stdout.layout = Logging::Layouts::Pattern.new( 
-    :pattern      => "[%d] %5l: %m\n",   # [date] LEVEL: message
-    :date_pattern => "%H:%M:%S"          # date == HH::MM::SS
-)
+  # log = Logging.logger['example']
+# logger.level = :info
+# logger.add_appenders Logging.appenders.stdout
+
+# # Logging.Appenders.stdout.layout = Logging::Layouts::Pattern.new( 
+#     :pattern      => "[%d] %5l: %m\n",   # [date] LEVEL: message
+#     :date_pattern => "%H:%M:%S"          # date == HH::MM::SS
+# )
 
 module Crate
   class Error < ::StandardError; end

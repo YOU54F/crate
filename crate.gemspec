@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # spec.add_runtime_dependency( "configuration", "~> 0.0.5")
-  # spec.add_runtime_dependency( "minitar")
-  spec.add_runtime_dependency( "amalgalite", "1.3.0")
+  spec.add_runtime_dependency( "csv")
+  spec.add_runtime_dependency( "amalgalite", "~> 1.9")
   # spec.add_runtime_dependency( "logging", "~> 0.9" )
 
   # spec.add_development_dependency "bundler", "~> 1.6"
@@ -31,13 +31,14 @@ Gem::Specification.new do |spec|
   # spec.add_runtime_dependency( "configuration", "1.3.4")
   spec.add_runtime_dependency( "minitar", '0.6')
   # spec.add_runtime_dependency( "amalgalite", "0.8.0")
-  spec.add_runtime_dependency( "flexmock", "0.8.2" )
-  spec.add_runtime_dependency( "logging", "0.9.7" )
+  # spec.add_runtime_dependency( "flexmock", "0.8.2" )
+  spec.add_runtime_dependency( "logging", "~> 2.3" )
+  spec.add_runtime_dependency( "net-ftp" )
 
   # spec.add_development_dependency "bundler", "1.0.15"
   # spec.add_development_dependency "bundler", "~> 1.6"
   # spec.add_development_dependency "rake", "0.9.2.2"
-  # spec.add_development_dependency "rake", "~> 0.9"
+  spec.add_development_dependency "rake"
 
   # if rdoc = Configuration.for_if_exist?('rdoc') then
   #   spec.has_rdoc         = true
